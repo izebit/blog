@@ -1,25 +1,30 @@
 # Dependencies
-markdown:         kramdown
-highlighter:      Rouge
+highlighter: rouge
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
 
 # Permalinks
-permalink:        pretty
+permalink: /:slug.html
 
 # Setup
 title:            Artem Konovalov
 tagline:          'A Jekyll theme'
-description:      'A brazen two-column <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
-url:              http://hyde.getpoole.com
+description: |
+  This website is a personal blog. Mainly there are
+  articles about java, but you can find ones on other topics.
+url:              https://izebit.ru
 baseurl:          /
 
 author:
-  name:           'Artem Konovalov'
-  url:            https://www.linkedin.com/in/conovart/
+  name:  'Artem Konovalov'
+  email: izebit@gmail.com
+
+linkedin: https://www.linkedin.com/in/conovart/
+github: https://github.com/izebit
+stackoverlow: https://ru.stackoverflow.com/users/10353/artem
+certificates: https://www.credly.com/users/artem-konovalov/badges
+
 
 paginate:         5
 
-# Custom vars
-version:          2.1.0
-
-github:
-  repo:           https://github.com/poole/hyde
