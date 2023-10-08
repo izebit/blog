@@ -9,10 +9,12 @@ permalink: /:slug.html
 
 # Setup
 title:            Artem Konovalov
-tagline:          'A Jekyll theme'
+tagline: |
+  posts on JVM based languages, concurrent programming, 
+  functional programming and stuff
 description: |
   This website is a personal blog. Mainly there are
-  articles about java, but you can find ones on other topics.
+  posts about java, but you can find ones on other topics.
 url:              https://izebit.ru
 baseurl:          /
 
@@ -22,7 +24,7 @@ author:
 
 linkedin: https://www.linkedin.com/in/conovart/
 github: https://github.com/izebit
-stackoverlow: https://ru.stackoverflow.com/users/10353/artem
+stackoverflow: https://ru.stackoverflow.com/users/10353/artem
 certificates: https://www.credly.com/users/artem-konovalov/badges
 
 

@@ -6,55 +6,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   {% if page.url contains ".html" %}
-  {% capture canonical_link %}{{ site.url }}{{ page.url }}{% endcapture %}
+    {% capture canonical_link %}{{ site.url }}{{ page.url }}{% endcapture %}
   {% elsif page.url == nil or page.url == '' or page.url == '/'  %}
-  {% capture canonical_link %}{{ site.url }}{% endcapture %}
+    {% capture canonical_link %}{{ site.url }}{% endcapture %}
   {% else %}
-  {% capture canonical_link %}{{ site.url }}{{ page.url }}.html{% endcapture %}
+    {% capture canonical_link %}{{ site.url }}{{ page.url }}.html{% endcapture %}
   {% endif %}
 
 
   {% if page.title %}
-  <title>{{page.title}}</title>
-  <meta property="og:title" content="{{ page.title }}">
+    <title>{{page.title}}</title>
+    <meta property="og:title" content="{{ page.title }}">
   {% else %}
-  <title>{{ site.title | escape }}</title>
-  <meta property="og:title" content="{{ site.title | escape }}">
+    <title>{{ site.title | escape }}</title>
+    <meta property="og:title" content="{{ site.title | escape }}">
   {% endif %}
   <link rel="canonical" href="{{ canonical_link }}">
   {% if page.keywords %}
-  <meta name="keywords" content="{{ page.keywords }}">
+    <meta name="keywords" content="{{ page.tags }}">
   {% endif %}
   <meta name="author" content="Artem Konovalov">
 
   <meta property="og:site_name" content="{{ site.title }}">
   {% if page.layout == "post" %}
-  <meta property="og:type" content="article">
-  <meta property="article:author" content="Artem Konovalov">
-  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
-  {% if page.category %}
-  <meta property="article:section" content="{{ page.category }}">
+    <meta property="og:type" content="article">
+    <meta property="article:author" content="Artem Konovalov">
+    <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+  {% if page.tags %}
+    <meta property="article:section" content="{{ page.category }}">
   {% endif %}
 
   {% elsif page.is_about == "true" %}
-  <meta property="og:type" content="profile">
-  <meta property="profile:first_name" content="Artem">
-  <meta property="profile:last_name" content="Konovalov">
+    <meta property="og:type" content="profile">
+    <meta property="profile:first_name" content="Artem">
+    <meta property="profile:last_name" content="Konovalov">
   {% else %}
-  <meta property="og:type" content="website">
+    <meta property="og:type" content="website">
   {% endif %}
 
-  <meta property="og:url" content="{{site.url}}{{page.url}}" >
+  <meta property="og:url" content="{{site.url}}{{page.url}}.html" >
   {% if page.description %}
-  <meta name="description" property="og:description" content="{{ page.description }}">
+    <meta name="description" property="og:description" content="{{ page.description }}">
   {% else %}
-  <meta name="description" property="og:description" content="{{ site.description }}">
+    <meta name="description" property="og:description" content="{{ site.description }}">
   {% endif %}
 
   {% if page.image %}
-  <meta property="og:image" content="{{site.url}}{{ page.image }}">
+    <meta property="og:image" content="{{site.url}}{{ page.image }}">
   {% else %}
-  <meta property="og:image" content="{{site.url}}/assets/photos/main-thumbnail.jpg">
+    <meta property="og:image" content="{{site.url}}/assets/logos/photos/main-thumbnail.jpg">
   {% endif %}
 
   <script type="application/ld+json">
@@ -68,24 +68,24 @@
       },
 
       {% if page.title %}
-      "headline": "{{ page.title }}",
+        "headline": "{{ page.title }}",
       {% else %}
-      "headline": "{{ site.title | escape }}",
+        "headline": "{{ site.title | escape }}",
       {% endif %}
 
       {% if page.description %}
-      "description": "{{ page.description }}",
+        "description": "{{ page.description }}",
       {% else %}
-      "description": "{{ site.description }}",
+        "description": "{{ site.description }}",
       {% endif %}
       "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "{{ canonical_link }}"
       },
       {% if page.image %}
-      "image": "{{site.url}}{{ page.image }}",
+        "image": "{{site.url}}{{ page.image }}",
       {% else %}
-      "image": "{{site.url}}/assets/photos/main-thumbnail.jpg.jpg",
+        "image": "{{site.url}}/assets/logos/photos/main-thumbnail.jpg",
       {% endif %}
       "datePublished": "{{ page.date | date: "%Y-%m-%d" }}",
       "url":  "{{ canonical_link }}"
