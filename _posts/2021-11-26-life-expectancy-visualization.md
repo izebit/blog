@@ -124,20 +124,15 @@ title: Life expectancy visualization
     window.onload = () => init(null, null);
 </script>
 
-<div style="
-      display: flex;
-      justify-content: center;
-      margin: auto;
-      width: 100%;
-      padding-top: 10px;
-      padding-bottom: 10px;">
 
+<div style="display:flex">
     <div>
         <canvas id="canvas"
                 width="300" height="300">
         </canvas>
     </div>
 
+    
     <div style="
         padding-left: 20px">
         <div style="padding-top: 10px">
