@@ -99,6 +99,18 @@ a.sidebar-nav-item:focus {
   font-weight: bold;
 }
 
+.sidebar-nav-item div {
+  display: inline-flex
+}
+
+.sidebar-nav-item img {
+  margin: 0
+}
+
+.sidebar-nav-item span {
+  margin-left: 5px
+}
+
 /* Sticky sidebar
  *
  * Add the `sidebar-sticky` class to the sidebar's container to affix it the

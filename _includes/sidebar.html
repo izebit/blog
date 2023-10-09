@@ -22,10 +22,27 @@
         {% endif %}
       {% endfor %}
 
-      <a class="sidebar-nav-item" href="{{ site.github }}" rel="nofollow">GitHub</a>
-      <a class="sidebar-nav-item" href="{{ site.linkedin }}" rel="nofollow">LinkedIn</a>
-      <a class="sidebar-nav-item" href="{{ site.stackoverflow }}" rel="nofollow">Stackoverflow [ru]</a>
-      <a class="sidebar-nav-item" href="{{ site.certificates }}" rel="nofollow">Certificates</a>
+      <a class="sidebar-nav-item" href="{{ site.github }}" rel="nofollow">
+        <div>
+          <img src="/assets/logos/social/github.png" width="30"  height="30"/>
+          <span>GitHub</span>
+        </div>
+      </a>
+      <a class="sidebar-nav-item" href="{{ site.linkedin }}" rel="nofollow">
+        <div>
+          <img src="/assets/logos/social/linkedin.png" width="30"  height="30"/>
+          <span>LinkedIn</span>
+        </div>
+      </a>
+      <a class="sidebar-nav-item" href="{{ site.stackoverflow }}" rel="nofollow">
+        <div>
+          <img src="/assets/logos/social/stackoverflow.png" width="30"  height="30"/>
+          <span>Stackoverflow [ru]</span>
+        </div>
+      </a>
+      <a class="sidebar-nav-item" href="{{ site.certificates }}" rel="nofollow">
+          Certificates
+      </a>
     </nav>
 
     <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>

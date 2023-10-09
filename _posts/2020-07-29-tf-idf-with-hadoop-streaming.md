@@ -2,7 +2,7 @@
 layout: post
 tags: 
   - hadoop
-title: TF-IDF with HADOOP STREAMING
+title: TF-IDF with Hadoop Streaming
 image: /assets/img/pipeline.jpg
 ---
 
