@@ -26,13 +26,16 @@ main concepts of Garbage Collectors and list available GC implementations.
 > Garbage Collector is a form of automatic memory management  
 > — <cite> Wikipedia
 
-The component takes care about reclaiming memory that was allocated for objects needed earlier. There are programming languages that don't provide this functionality and a programmer has to release memory manually.
-**Java Virtual Machine** (JVM) includes garbage collector. It means that all JVM-based languages e.g. Java, Kotlin, Scala, Clojure support automatic reclaiming unused objects.  
-There are many algorithms that might be applied to check if an object is not needed anymore and thus memory for the object might be reused for other objects. But the main point of them is if there are no references to an object, the object is unreachable and can't be used. By this way, all this type of object might be deleted safely.
+The component takes care about reclaiming memory that was allocated for objects needed earlier. There are programming languages that don't provide this functionality and a programmer has to manage memory manually.
+**Java Virtual Machine** (JVM) includes garbage collector. It means that all JVM-based languages e.g. Java, Kotlin, Scala, Clojure supports automatic reclaiming unused objects.  
+There are many algorithms that might be applied to check if an object is not needed and
+memory for the object might be reused for other objects. The main idea of them is if there are no references 
+to an object, the object is unreachable and can't be used. By this way, this type of objects might be deleted safely.
 
 <img src="/assets/img/garbage-collectors/references-graph.png" alt="graph of references"/>
 
-There are several points GC starts where a reference traversal. They are called **GC Roots**. It might be static variables, classes loaded by system class loaders, active threads etc.
+Garbage Collector traverses the reference graph from the several start points. They are called **GC Roots**. 
+It might be static variables, classes loaded by system class loaders, active threads etc.
 
 There are some common phases of the GC work that encounter in listed below garbage collectors:
 1. Identify live objects that are reachable from the GC Roots
@@ -42,7 +45,8 @@ There are some common phases of the GC work that encounter in listed below garba
 Let's talk about what type of garbage collectors you can use if you write code in JVM-based language.
 
 <h2 id="serial">Serial Garbage Collector</h2>
-It's one of the oldest garbage collector and exists from the first version of JVM. Serial Garbage Collector works simply. All running threads are suspended and all references are checked by one thread. It occurs **stop-the-world** pause.
+It's one of the oldest garbage collector and exists from the first version of JVM. **Serial Garbage Collector** works simply. 
+All running threads are suspended and all references are checked by one thread. It occurs *stop-the-world* pause.
 
 To enable the GC, use the following command:
 ```bash
@@ -50,7 +54,8 @@ java \
 -XX:+UseSerialGC # enable Serial Garbage Collector
 ```
 <h2 id="parallel">Parallel Garbage Collector</h2>
-Based on the name, you might guess how it works. The Parallel Garbage Collector works as Serial Garbage Collector works, but we can set number of threads. By this way, the total *stop-the-world pause* must be less if garbage collector works in multi-thread mode.
+Based on the name, you might guess how it works. The **Parallel Garbage Collector** works as 
+**Serial Garbage Collector** works, but we can set number of threads. By this way, the total *stop-the-world pause* must be less if garbage collector works in multi-thread mode.
 
 There are several JVM flags that works with Parallel Garbage Collector.
 ```bash
@@ -75,15 +80,20 @@ By this way, there is no need of scanning the whole set of objects. If memory is
 CMS Collector works in pretty the same way.  All memory is split into 3 regions:
 1. Permanent Generation
 1. Young Generation
-2. Old Generation
-   **Permanent Generation** is a memory region where JVM locates static data e.g. loaded classes metadata, static methods, static variables.  
-   **Young Generation** is a segment where JVM allocates memory for a new objects. After several GC collections, if an object is still alive, it will be moved to **Old Generation**
-   **Old Generation** is memory region where "old" objects are located. At some point, object might be placed there directly if capacity of **Young Generation** doesn't let do it.
+2. Old Generation  
+
+**Permanent Generation** is a memory region where JVM locates static data e.g. loaded classes metadata, static methods, static variables.    
+**Young Generation** is a segment where JVM allocates memory for a new objects. After several GC collections, if an object is still alive, it will be moved to **Old Generation**.  
+**Old Generation** is memory region where "old" objects are located. At some point, object might be placed there directly if capacity of **Young Generation** doesn't let do it.
 
 <img src="/assets/img/garbage-collectors/structure-of-heap.png" alt="Structure of the hotspot heap"/>
 
-This garbage collector is a combination of two previous ones. **Serial Garbage Collector** and **Parallel Garbage Collector** get on the stage at different time.
-Initially, **Parallel Garbage Collector** pauses application threads twice. At *initial pause* it marks objects that are reachable from the *GC Roots* as live. Then **Parallel Garbage Collector** traces the available references concurrently and identifies reachable objects without suspending application threads. Since application is running during this step, checked references might be changed. That's why **Parallel Garbage Collector** needs the second *remark* pause. After it, all objects that aren't reachable might be removed and live objects are compacted. This operation happens during *Concurrent Sweep* phase.
+This garbage collector is a combination of two previous ones. **Serial Garbage Collector** and **Parallel Garbage Collector** get on the stage at different time.  
+Initially, **Parallel Garbage Collector** pauses application threads twice. At *initial pause* 
+it marks objects that are reachable from the *GC Roots* as live. Then **Parallel Garbage Collector** traces 
+the available references concurrently and identifies reachable objects without suspending application threads. 
+Since application is running during this step, checked references might be changed. That's why **Parallel Garbage Collector** needs the second *remark* pause. 
+After it, all objects that aren't reachable might be removed and live objects are compacted. This operation happens during *Concurrent Sweep* phase.  
 When **Old Generation** becomes full **Serial Collector** starts working. In this case, all application threads are stopped while collection is done.
 
 There are several JVM flags that might come in handy to work with CMS Collector:
@@ -213,8 +223,7 @@ Links:
 - <a href="https://www.infoworld.com/article/2078661/jvm-performance-optimization--part-4--c4-garbage-collection-for-low-latency-java-ap.html" rel="nofollow">JVM performance optimization, Part 4: C4 garbage collection for low-latency Java applications</a>
 
 <h2 id="epsilon">Epsilon Garbage Collector</h2>
-This garbage collector is pretty simple in comparison to the mentioned earlier ones. It doesn't collector garbage. With enabled  **Epsil
-on GC**  sooner or later `java.lang.OutOfMemoryError` occurs. For sure, if you don't have infinite capacity of RAM or your program doesn't allocate new objects at all. At some case, it might be a good option, if latency is important and overhead from a garbage collector is not acceptable e.g. microbenchmarking, garbage free or short-running programs.
+This garbage collector is pretty simple in comparison to the mentioned earlier ones. It doesn't collector garbage. With enabled  **Epsilon GC**  sooner or later `java.lang.OutOfMemoryError` occurs. For sure, if you don't have infinite capacity of RAM or your program doesn't allocate new objects at all. At some case, it might be a good option, if latency is important and overhead from a garbage collector is not acceptable e.g. microbenchmarking, garbage free or short-running programs.
 
 With following flags you can enable this **Epsilon Garbage Collector**:
 
