@@ -79,8 +79,8 @@ By this way, there is no need of scanning the whole set of objects. If memory is
 
 CMS Collector works in pretty the same way.  All memory is split into 3 regions:
 1. Permanent Generation
-1. Young Generation
-2. Old Generation  
+2. Young Generation
+3. Old Generation  
 
 **Permanent Generation** is a memory region where JVM locates static data e.g. loaded classes metadata, static methods, static variables.    
 **Young Generation** is a segment where JVM allocates memory for a new objects. After several GC collections, if an object is still alive, it will be moved to **Old Generation**.  
@@ -107,7 +107,7 @@ java \
 -XX:+UseParNewGC             # use parallelism during GC on new generation area
 ```
 
-Links:
+#### Links:
 - <a href="https://docs.oracle.com/en/java/javase/11/gctuning/concurrent-mark-sweep-cms-collector.html#GUID-FF8150AC-73D9-4780-91DD-148E63FA1BFF" rel="nofollow">HotSpot Virtual Machine Garbage Collection Tuning Guide</a>
 
 <h2 id="g1">G1 - Garbage First Collector</h2>
@@ -133,7 +133,7 @@ java \
 -XX:ConcGCThreads=<N>              # total count of threads for GC
 ```
 
-Links:
+#### Links:
 - <a href="https://docs.oracle.com/en/java/javase/11/gctuning/garbage-first-g1-garbage-collector1.html#GUID-6D6B18B1-063B-48FF-99E3-5AF059C43CE8" rel="nofollow">HotSpot Virtual Machine Garbage Collection Tuning Guide</a>
 - <a href="https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html" rel="nofollow">Getting Started with the G1 Garbage Collector</a>
 
@@ -178,7 +178,7 @@ java \
 -XX:+ZGenerational  # Generational ZGC is enabled
 ```
 
-Links:
+#### Links:
 - <a href="https://docs.oracle.com/en/java/javase/11/gctuning/z-garbage-collector1.html#GUID-A5A42691-095E-47BA-B6DC-FB4E5FAA43D0" rel="nofollow">HotSpot Virtual Machine Garbage Collection Tuning Guide</a>
 - <a href="https://www.youtube.com/watch?v=WU_mqNBEacw" rel="nofollow">[VDT19] Concurrent Garbage Collectors: ZGC & Shenandoah by Simone Bordet [IT]</a>
 - <a href="https://wiki.openjdk.org/display/zgc" rel="nofollow">The Z Garbage Collector (ZGC)</a>
@@ -204,7 +204,7 @@ To use this **ShenandoahGC**, enable the JVM flag below:
 java 
 -XX:+UseShenandoahGC # enable Shenandoah Garbage Collector
 ```
-Links:
+#### Links:
 - <a href="https://wiki.openjdk.org/display/shenandoah/Main" rel="nofollow">Shenandoah GC</a>
 
 <h2 id="c4">Azul C4 Garbage Collector</h2>
@@ -216,7 +216,7 @@ There are 3 phases of C4 algorithm.
 2. Relocation - move objects in order to free up larger consequent memory regions.
 3. Remapping - change the references to a new location of relocated objects.
 
-Links:
+#### Links:
 - <a href="https://www.azul.com/sites/default/files/images/c4_paper_acm.pdf" rel="nofollow">C4: The Continuously Concurrent Compacting Collector</a>
 - <a href="https://www.azul.com/products/components/pgc/" rel="nofollow">Azul C4 Garbage Collector</a>
 - <a href="https://www.youtube.com/watch?v=ocUx-QUJMfo" rel="nofollow">Really Understanding Garbage Collection Gil Tene Talk QCon SF 2019</a>
@@ -233,5 +233,5 @@ XX:+UnlockExperimentalVMOptions   # unlock experimental features
 -XX:+UseEpsilonGC                 # enable Epsilon Garbage Collector
 ```
 
-Links:
+#### Links:
 - <a href="https://blogs.oracle.com/javamagazine/post/epsilon-the-jdks-do-nothing-garbage-collector" rel="nofollow">Epsilon: The JDK’s Do-Nothing Garbage Collector</a>
