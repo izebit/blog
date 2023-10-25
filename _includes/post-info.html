@@ -1,0 +1,13 @@
+{% assign words = content | number_of_words %}
+
+{% if words < 360 %}
+    {% assign remain_time_text = 'About 1 min' %}
+{% else %}
+   {% capture remain_time_text %}{{ words | divided_by:180 }} min {% endcapture %}
+{% endif %}
+
+
+<span class="post-date">
+   📅 {{ page.date | date_to_string }} 🕑 {{ remain_time_text }} read
+</span>
+
